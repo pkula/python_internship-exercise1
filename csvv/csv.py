@@ -7,8 +7,6 @@ def read_csv(file_name):
         lines = file.readlines()
     return lines
 
-
-
 def cut_lines(lines):
     lines = [element.replace("\n" ,"").split(",") for element in lines]
     l = copy.deepcopy(lines)
@@ -18,7 +16,6 @@ def cut_lines(lines):
             l.remove(lines[i])
     return l
 
-
 def format_date(lines):
     l = copy.deepcopy(lines)
     for i in range(len(lines)-1,-1,-1):
@@ -26,11 +23,11 @@ def format_date(lines):
         day = lines[i][0][3:5]
         year = lines[i][0][6:]
         try:
+            date = year + "-" + month + "-" + day;
+            l[i][0] = date
             int(day)
             int(month)
             int(year)
-            date = year + "-" + month + "-" + day;
-            lines[i][0] = date
         except ValueError:
             print("zly format daty w linijce " +str(i+1), file=sys.stderr)
             l.remove(lines[i])
@@ -39,8 +36,6 @@ def format_date(lines):
             print("zly przedzial daty w linijce "+ str(i+1), file=sys.stderr)
             l.remove(lines[i])
             continue
-    print(len(lines))
-    print(len(l))
     return l
 
 

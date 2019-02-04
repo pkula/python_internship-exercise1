@@ -1,8 +1,10 @@
 from controllerr import controller
+import sys
 
 
 def main():
-    controller.run()
+    controller.run(sys.argv)
+    
    
 
 if __name__ == '__main__':
