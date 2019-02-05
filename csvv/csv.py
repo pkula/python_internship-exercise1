@@ -91,7 +91,27 @@ def remove_multiplicity(lines):
             lines.remove(123456789)
     return lines
 
+"""conversion date to int
+format date: YYYY-MM-DD
+example: conv("1994-07-24")
+"""
+def conv(date):
+    return int(date[0:4] + date[5:7] + date[8:])
 
+
+
+
+""" 
+this sort is not quick so if you have to convert a big csv you must write a quick sort or bubble sort 
+"""
+def arrangment(lines):
+    for i in range(len(lines)-1):
+        for a in range(i+1,len(lines)):
+            if conv(lines[i][0]) > conv(lines[a][0]) or conv(lines[i][0]) == conv(lines[a][0]) and lines[i][1] > lines[a][1] :
+                t = lines[i]
+                lines[i] = lines[a]
+                lines[a] = t
+    return lines
 
 
 

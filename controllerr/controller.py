@@ -29,6 +29,7 @@ def run(opt):
         lines = csv.format_CTR(lines)
         lines = csv.replace_countries(lines)
         lines = csv.remove_multiplicity(lines)
+        lines = csv.arrangment(lines)
         for line in lines:
 
             print(line)
