@@ -3,6 +3,11 @@ import sys
 
 
 def option(opt):
+    """this function check if user add a unnecesary option
+       
+        :praram opt: this is a list (from console)
+        :type opt: list argv
+    """
     file_to_open = "csv.csv"
     file_to_save = "new_scv.csv"
     if len(opt) > 1:
@@ -15,7 +20,13 @@ def option(opt):
                 file_to_save = opt[i+1]
     return [file_to_open,file_to_save]
 
+
 def run(opt):
+    """this function control whole program
+        
+        :param opt:
+        :type opt: list argv
+    """
     files = option(opt)
     file_to_open = files[0]
     file_to_save = files[1]
@@ -31,8 +42,6 @@ def run(opt):
         lines = csv.remove_multiplicity(lines)
         lines = csv.arrangment(lines)
         for line in lines:
-
             print(line)
-
         file_name = "news.csv"
         csv.write_to_file(file_to_save,lines)

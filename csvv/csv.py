@@ -1,13 +1,17 @@
-import pycountry
-import copy
 import sys
+import copy
+import pycountry
+
 
 def read_csv(file_name):
+    #this function read a file line by line and return list contain lines
     with open(file_name, "r") as file:
         lines = file.readlines()
     return lines
 
+
 def cut_lines(lines):
+    #this function cut line to a single data and replace list contain lists 
     lines = [element.replace("\n" ,"").split(",") for element in lines]
     l = copy.deepcopy(lines)
     for i in range(len(lines)-1,-1,-1):
@@ -16,7 +20,9 @@ def cut_lines(lines):
             l.remove(lines[i])
     return l
 
+
 def format_date(lines):
+    #this function get all cutted data and then change to format date
     l = copy.deepcopy(lines)
     for i in range(len(lines)-1,-1,-1):
         month = lines[i][0][0:2]
@@ -40,8 +46,8 @@ def format_date(lines):
 
 
 
-# funkcja bierze liste miast i zwraca liste panstw w notacji 3 literowej
 def replace_countries(lines):
+    # this function get a lines and change region to country (3'letters notation)
     list_countries = []
     if_add = False
     for line in lines:
@@ -57,14 +63,8 @@ def replace_countries(lines):
     return lines
 
 
-
-
-
-
-
-
-
 def format_CTR(lines):
+    # this function change %CTR to numbers
     l = copy.deepcopy(lines)
     for i in range(len(lines)-1,-1,-1):
         try:
@@ -75,9 +75,8 @@ def format_CTR(lines):
     return l
 
 
-
-
 def remove_multiplicity(lines):
+    # this function combines a record with this same date and city
     new_lines = copy.deepcopy(lines)
     for i in range(len(lines)-1):
         for a in range(i+1,len(lines)):
@@ -91,20 +90,19 @@ def remove_multiplicity(lines):
             lines.remove(123456789)
     return lines
 
-"""conversion date to int
-format date: YYYY-MM-DD
-example: conv("1994-07-24")
-"""
+
 def conv(date):
+    """conversion date to int
+    format date: YYYY-MM-DD
+    example: conv("1994-07-24")
+    """
     return int(date[0:4] + date[5:7] + date[8:])
 
 
-
-
-""" 
-this sort is not quick so if you have to convert a big csv you must write a quick sort or bubble sort 
-"""
 def arrangment(lines):
+    """ this function sort not quick so if you have to convert a big csv
+     you must write a function based quick sort or bubble sort 
+    """
     for i in range(len(lines)-1):
         for a in range(i+1,len(lines)):
             if conv(lines[i][0]) > conv(lines[a][0]) or conv(lines[i][0]) == conv(lines[a][0]) and lines[i][1] > lines[a][1] :
@@ -112,9 +110,6 @@ def arrangment(lines):
                 lines[i] = lines[a]
                 lines[a] = t
     return lines
-
-
-
 
 
 def write_to_file(file_name,lines):
