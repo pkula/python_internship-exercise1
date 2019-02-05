@@ -32,8 +32,8 @@ Project is created with:
 
 ## External libraries
 
-import copy
-import pycountr
+* copy
+* pycountr
 
 
 ## Setup
